@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Mining Exam Notes</title>
+    <title>Data Mining Exam Notes (Dark Mode)</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- KaTeX CSS for rendering formulas -->
@@ -13,7 +13,15 @@
         body {
             font-family: 'Inter', sans-serif;
             -webkit-tap-highlight-color: transparent;
+            color: #E5E7EB; /* Default light gray text */
         }
+        .header {
+            /* Setting a fixed height for a consistent visual top bar */
+            height: 64px; 
+            line-height: 64px;
+            padding: 0 1rem;
+        }
+
         .question-content {
             transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
             overflow: hidden;
@@ -25,25 +33,49 @@
             padding-bottom: 0;
         }
         .highlight {
-            background-color: yellow;
+            background-color: #fce303; /* Bright yellow highlight */
+            color: #0a0a0a;
             font-weight: bold;
         }
-        .latex-formula-block {
-            padding: 1rem;
-            margin: 1rem 0;
-            background-color: #f8f8f8;
-            border-radius: 0.5rem;
-            overflow-x: auto;
-        }
+        
+        /* Key terms in dark mode */
         .key-term {
-            color: #d9534f;
+            color: #00bcd4; /* Bright cyan accent for key terms */
             font-weight: 600;
         }
         
-        /* Print Styles: Make it compact for printing */
+        /* KaTeX styling to ensure high contrast in dark mode */
+        .katex-display {
+            padding: 1rem;
+            margin: 1rem 0;
+            background-color: #1f2937; /* Dark gray for formula blocks */
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            color: #E5E7EB;
+        }
+
+        /* Table styling for dark mode */
+        .min-w-full th, .min-w-full td {
+            border-color: #374151 !important;
+        }
+        .min-w-full thead tr {
+            background-color: #1f2937;
+        }
+        .min-w-full tbody tr:nth-child(even) {
+            background-color: #111827; /* Dark stripe */
+        }
+        .min-w-full tbody tr:nth-child(odd) {
+            background-color: #0a0a0a; /* True black background */
+        }
+
+        /* Print Styles: Retain high contrast, but use white paper */
         @media print {
             .header, .toc-controls, .action-bar {
                 display: none !important;
+            }
+            body, .question-card, .question-content {
+                background-color: white !important;
+                color: #000 !important;
             }
             .question-card {
                 box-shadow: none !important;
@@ -56,35 +88,38 @@
                 max-height: none !important;
                 padding: 0.5rem !important;
             }
+            .key-term {
+                color: #d9534f; /* Reset key term color for print */
+            }
             table, th, td {
                 border-color: #000 !important;
             }
         }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-950">
 
-    <!-- Sticky Header -->
-    <header class="header sticky top-0 bg-blue-700 text-white shadow-lg p-4 z-20">
+    <!-- Sticky Header (top-0 z-20) -->
+    <header class="header sticky top-0 bg-gray-900 text-white shadow-xl z-20">
         <h1 class="text-xl font-bold text-center">Data Mining Exam Notes</h1>
     </header>
 
     <main class="container mx-auto p-4 lg:p-6">
         
-        <!-- Controls & TOC (Sticky on Desktop) -->
-        <div class="toc-controls sticky top-16 bg-white p-4 mb-4 rounded-lg shadow-md z-10 space-y-4">
+        <!-- Controls & TOC (NO STICKY CLASSES HERE) -->
+        <div class="toc-controls bg-gray-900 p-4 mb-4 rounded-lg shadow-2xl space-y-4 border border-gray-800">
             
             <div class="flex flex-col sm:flex-row gap-3">
                 <input type="text" id="search-input" placeholder="Search and highlight text..." 
-                       class="flex-grow p-2 border border-gray-300 rounded-lg text-sm focus:ring-blue-500 focus:border-blue-500" 
+                       class="flex-grow p-2 bg-gray-800 text-white border border-gray-700 rounded-lg text-sm focus:ring-blue-500 focus:border-blue-500" 
                        oninput="highlightText(this.value)">
-                <button onclick="window.print()" class="print-btn w-full sm:w-auto px-4 py-2 bg-gray-500 text-white rounded-lg shadow hover:bg-gray-600 transition">
+                <button onclick="window.print()" class="print-btn w-full sm:w-auto px-4 py-2 bg-blue-700 text-white rounded-lg shadow-lg hover:bg-blue-600 transition">
                     Print Notes
                 </button>
             </div>
 
             <nav>
-                <ul id="toc" class="flex flex-wrap justify-center sm:justify-start gap-2 border-t pt-3 mt-3">
+                <ul id="toc" class="flex flex-wrap justify-center sm:justify-start gap-2 border-t border-gray-700 pt-3 mt-3">
                     <!-- TOC links generated by JS -->
                 </ul>
             </nav>
@@ -94,15 +129,15 @@
         <section id="notes-container" class="space-y-4">
             
             <!-- Question 1 -->
-            <article class="question-card bg-white rounded-lg shadow-md border border-gray-200" id="q1">
-                <div class="question-header p-4 bg-blue-100/50 hover:bg-blue-200 cursor-pointer flex justify-between items-center rounded-t-lg" data-target="q1">
-                    <h2 class="question-title text-base font-semibold text-blue-800">1. Explain the Naïve Bayes Classifier with a suitable example. Discuss its advantages and limitations.</h2>
-                    <span class="toggle-icon text-blue-800">&#9660;</span>
+            <article class="question-card bg-gray-900 rounded-lg shadow-xl border border-gray-800" id="q1">
+                <div class="question-header p-4 bg-gray-800 hover:bg-gray-700 cursor-pointer flex justify-between items-center rounded-t-lg transition" data-target="q1">
+                    <h2 class="question-title text-base font-semibold text-blue-300">1. Explain the Naïve Bayes Classifier with a suitable example. Discuss its advantages and limitations.</h2>
+                    <span class="toggle-icon text-blue-300">&#9660;</span>
                 </div>
-                <div class="question-content p-4 border-t border-gray-200">
+                <div class="question-content p-4 border-t border-gray-800">
                     <div class="answer-text">
                         <p class="text-sm">The Naïve Bayes Classifier is a probabilistic classification algorithm based on Bayes’ Theorem. It operates under the <strong class="key-term">naïve assumption</strong> that the presence of a particular feature in a class is independent of the presence of any other feature, given the class variable.</p>
-                        <p class="font-bold text-base mt-3 mb-1 text-blue-900">Bayes' Theorem:</p>
+                        <p class="font-bold text-base mt-3 mb-1 text-blue-400">Bayes' Theorem:</p>
                         $$P(C|X) = \frac{P(X|C)P(C)}{P(X)}$$
                         <p class="mt-2 text-sm">Where:</p>
                         <ul class="list-disc ml-5 space-y-1 text-sm">
@@ -111,91 +146,91 @@
                             <li>$P(C)$: Prior probability (the probability of class $C$).</li>
                             <li>$P(X)$: Predictor prior probability (the probability of data $X$).</li>
                         </ul>
-                        <p class="font-bold text-base mt-3 mb-1 text-blue-900">Example (Classification of a fruit as 'Banana' or 'Orange'):</p>
+                        <p class="font-bold text-base mt-3 mb-1 text-blue-400">Example (Classification of a fruit as 'Banana' or 'Orange'):</p>
                         <p class="text-sm">Suppose a fruit has features $X = \{ \text{Long}, \text{Sweet}, \text{Yellow} \}$.
                         The classifier calculates the posterior probability for each class ($C_1=\text{Banana}, C_2=\text{Orange}$) using the naive assumption:</p>
                         $$P(C|X) \propto P(C) \times P(\text{Long}|C) \times P(\text{Sweet}|C) \times P(\text{Yellow}|C)$$
                         <p class="text-sm">The fruit is assigned to the class with the highest posterior probability.</p>
-                        <p class="font-bold text-base mt-4 mb-1 text-green-700">Advantages:</p>
+                        <p class="font-bold text-base mt-4 mb-1 text-green-400">Advantages:</p>
                         <ul class="list-disc ml-5 space-y-1 text-sm">
                             <li><strong class="key-term">Simple and Fast:</strong> Easy to implement and computationally efficient.</li>
                             <li><strong class="key-term">Scalability:</strong> Requires a small amount of training data to estimate the necessary parameters.</li>
                             <li><strong class="key-term">Good Performance:</strong> Often performs well in text classification and multi-class prediction problems due to its robust handling of high-dimensional data.</li>
                         </ul>
-                        <p class="font-bold text-base mt-4 mb-1 text-red-700">Limitations:</p>
+                        <p class="font-bold text-base mt-4 mb-1 text-red-400">Limitations:</p>
                         <ul class="list-disc ml-5 space-y-1 text-sm">
                             <li><strong class="key-term">Conditional Independence Assumption:</strong> The "naïve" assumption that all features are independent is rarely true in real-world data, which can lead to prediction inaccuracies.</li>
                             <li><strong class="key-term">Zero Frequency Problem:</strong> If a categorical feature value does not appear in the training data for a class, the likelihood $P(X|C)$ will be zero, causing the entire posterior probability for that class to become zero. (Handled typically by Laplace smoothing).</li>
                         </ul>
                     </div>
-                    <div class="action-bar pt-3 mt-3 border-t flex justify-end">
-                        <button class="copy-btn px-3 py-1 text-xs bg-green-500 text-white rounded-full hover:bg-green-600 transition" onclick="copyAnswer(1)">Copy Answer</button>
+                    <div class="action-bar pt-3 mt-3 border-t border-gray-700 flex justify-end">
+                        <button class="copy-btn px-3 py-1 text-xs bg-green-600 text-white rounded-full shadow hover:bg-green-500 transition" onclick="copyAnswer(1)">Copy Answer</button>
                     </div>
                 </div>
             </article>
 
             <!-- Question 2 -->
-            <article class="question-card bg-white rounded-lg shadow-md border border-gray-200" id="q2">
-                <div class="question-header p-4 bg-blue-100/50 hover:bg-blue-200 cursor-pointer flex justify-between items-center rounded-t-lg" data-target="q2">
-                    <h2 class="question-title text-base font-semibold text-blue-800">2. Explain the k-Nearest Neighbor (k-NN) algorithm for classification. How is the value of k chosen?</h2>
-                    <span class="toggle-icon text-blue-800">&#9660;</span>
+            <article class="question-card bg-gray-900 rounded-lg shadow-md border border-gray-800" id="q2">
+                <div class="question-header p-4 bg-gray-800 hover:bg-gray-700 cursor-pointer flex justify-between items-center rounded-t-lg transition" data-target="q2">
+                    <h2 class="question-title text-base font-semibold text-blue-300">2. Explain the k-Nearest Neighbor (k-NN) algorithm for classification. How is the value of k chosen?</h2>
+                    <span class="toggle-icon text-blue-300">&#9660;</span>
                 </div>
-                <div class="question-content p-4 border-t border-gray-200">
+                <div class="question-content p-4 border-t border-gray-800">
                     <div class="answer-text">
-                        <p class="font-bold text-base mt-1 mb-1 text-blue-900">k-Nearest Neighbor (k-NN) Algorithm</p>
+                        <p class="font-bold text-base mt-1 mb-1 text-blue-400">k-Nearest Neighbor (k-NN) Algorithm</p>
                         <p class="text-sm">The k-NN algorithm is a <strong class="key-term">non-parametric, lazy learning</strong> classification method. It classifies a new data point (query point) based on the majority class among its 'k' closest neighbors in the feature space.</p>
-                        <p class="font-bold text-sm mt-3 mb-1 text-blue-900">Process:</p>
+                        <p class="font-bold text-sm mt-3 mb-1 text-blue-400">Process:</p>
                         <ol class="list-decimal ml-5 space-y-1 text-sm">
                             <li><strong class="key-term">Distance Calculation:</strong> Calculate the distance (e.g., Euclidean, Manhattan) between the new query point and all points in the training dataset.</li>
                             <li><strong class="key-term">Neighbor Selection:</strong> Select the $k$ training samples that are closest to the new query point based on the calculated distances.</li>
                             <li><strong class="key-term">Classification:</strong> Assign the query point to the class that is most frequent (majority vote) among its $k$ nearest neighbors. In case of ties, different tie-breaking rules can be used.</li>
                         </ol>
-                        <p class="font-bold text-base mt-4 mb-1 text-blue-900">Choosing the Value of $k$</p>
+                        <p class="font-bold text-base mt-4 mb-1 text-blue-400">Choosing the Value of $k$</p>
                         <p class="text-sm">The value of $k$ is a crucial hyperparameter, typically chosen through <strong class="key-term">empirical testing</strong> (cross-validation) on the training data.</p>
                         <ul class="list-disc ml-5 space-y-1 text-sm">
                             <li><strong class="key-term">Small $k$:</strong> Low bias, high variance. The model is highly susceptible to noise (outliers) and leads to a complex decision boundary (overfitting).</li>
                             <li><strong class="key-term">Large $k$:</strong> High bias, low variance. The model tends to smooth out the decision boundary and may lead to underfitting (losing local characteristics).</li>
                         </ul>
-                        <p class="font-bold text-sm mt-3 mb-1 text-blue-900">Optimal $k$ Selection:</p>
+                        <p class="font-bold text-sm mt-3 mb-1 text-blue-400">Optimal $k$ Selection:</p>
                         <ol class="list-decimal ml-5 space-y-1 text-sm">
                             <li>Often, $k$ is chosen as an odd number to prevent ties in binary classification.</li>
                             <li>The optimal value is determined by selecting a range of $k$ values and evaluating the classifier's performance (e.g., accuracy) using cross-validation. The $k$ that yields the best performance on the validation set is selected.</li>
                         </ol>
                     </div>
-                    <div class="action-bar pt-3 mt-3 border-t flex justify-end">
-                        <button class="copy-btn px-3 py-1 text-xs bg-green-500 text-white rounded-full hover:bg-green-600 transition" onclick="copyAnswer(2)">Copy Answer</button>
+                    <div class="action-bar pt-3 mt-3 border-t border-gray-700 flex justify-end">
+                        <button class="copy-btn px-3 py-1 text-xs bg-green-600 text-white rounded-full shadow hover:bg-green-500 transition" onclick="copyAnswer(2)">Copy Answer</button>
                     </div>
                 </div>
             </article>
             
             <!-- Question 3 -->
-            <article class="question-card bg-white rounded-lg shadow-md border border-gray-200" id="q3">
-                <div class="question-header p-4 bg-blue-100/50 hover:bg-blue-200 cursor-pointer flex justify-between items-center rounded-t-lg" data-target="q3">
-                    <h2 class="question-title text-base font-semibold text-blue-800">3. Define Association Rule Mining. Clearly explain the terms Support and Confidence with mathematical formulas and an example.</h2>
-                    <span class="toggle-icon text-blue-800">&#9660;</span>
+            <article class="question-card bg-gray-900 rounded-lg shadow-md border border-gray-800" id="q3">
+                <div class="question-header p-4 bg-gray-800 hover:bg-gray-700 cursor-pointer flex justify-between items-center rounded-t-lg transition" data-target="q3">
+                    <h2 class="question-title text-base font-semibold text-blue-300">3. Define Association Rule Mining. Clearly explain the terms Support and Confidence with mathematical formulas and an example.</h2>
+                    <span class="toggle-icon text-blue-300">&#9660;</span>
                 </div>
-                <div class="question-content p-4 border-t border-gray-200">
+                <div class="question-content p-4 border-t border-gray-800">
                     <div class="answer-text">
-                        <p class="font-bold text-base mt-1 mb-1 text-blue-900">Association Rule Mining</p>
+                        <p class="font-bold text-base mt-1 mb-1 text-blue-400">Association Rule Mining</p>
                         <p class="text-sm">Association Rule Mining is a technique used to find frequent patterns, associations, correlations, or causal structures among sets of items or objects in transaction databases, relational databases, and other information repositories. It aims to discover rules of the form $A \Rightarrow B$, meaning that transactions containing itemset $A$ tend to also contain itemset $B$.</p>
-                        <h4 class="font-bold text-sm mt-3 mb-1 text-blue-900">Terms:</h4>
-                        <p class="font-bold text-sm mt-3 mb-1 text-gray-700">A. Support ($S$)</p>
+                        <h4 class="font-bold text-sm mt-3 mb-1 text-blue-400">Terms:</h4>
+                        <p class="font-bold text-sm mt-3 mb-1 text-gray-400">A. Support ($S$)</p>
                         <ul class="list-disc ml-5 space-y-1 text-sm">
                             <li><strong class="key-term">Definition:</strong> Support is an indication of how frequently the itemset appears in the database.</li>
                             <li><strong class="key-term">Formula:</strong> The support for an itemset $A \Rightarrow B$ is the proportion of total transactions $T$ that contain both $A$ and $B$.</li>
                         </ul>
                         $$Support(A \Rightarrow B) = Support(A \cup B) = \frac{\text{Number of transactions containing } A \cup B}{\text{Total number of transactions}}$$
-                        <p class="font-bold text-sm mt-4 mb-1 text-gray-700">B. Confidence ($C$)</p>
+                        <p class="font-bold text-sm mt-4 mb-1 text-gray-400">B. Confidence ($C$)</p>
                         <ul class="list-disc ml-5 space-y-1 text-sm">
                             <li><strong class="key-term">Definition:</strong> Confidence is an indication of the number of times the rule $A \Rightarrow B$ has been found to be true (i.e., the probability that $B$ appears given that $A$ has already appeared).</li>
                             <li><strong class="key-term">Formula:</strong></li>
                         </ul>
                         $$Confidence(A \Rightarrow B) = P(B|A) = \frac{\text{Support}(A \cup B)}{\text{Support}(A)} = \frac{\text{Number of transactions containing } A \cup B}{\text{Number of transactions containing } A}$$
-                        <p class="font-bold text-sm mt-4 mb-1 text-blue-900">Example (Transaction Database):</p>
+                        <p class="font-bold text-sm mt-4 mb-1 text-blue-400">Example (Transaction Database):</p>
                         <div class="overflow-x-auto">
                             <table class="min-w-full text-sm">
                                 <thead>
-                                    <tr class="bg-gray-100">
+                                    <tr class="bg-gray-700">
                                         <th class="p-2 text-center">Transaction ID</th>
                                         <th class="p-2 text-center">Items Bought</th>
                                     </tr>
@@ -236,25 +271,25 @@
                         $$\text{Confidence}(\{\text{Bread}\} \Rightarrow \{\text{Milk}\}) = \frac{\text{Support}(\{\text{Bread}, \text{Milk}\})}{\text{Support}(\{\text{Bread}\})} = \frac{3/5}{4/5} = \frac{3}{4} = 0.75 \text{ (75\%)}$$
                         <p class="text-sm mt-2">This means 75% of customers who buy Bread also buy Milk.</p>
                     </div>
-                    <div class="action-bar pt-3 mt-3 border-t flex justify-end">
-                        <button class="copy-btn px-3 py-1 text-xs bg-green-500 text-white rounded-full hover:bg-green-600 transition" onclick="copyAnswer(3)">Copy Answer</button>
+                    <div class="action-bar pt-3 mt-3 border-t border-gray-700 flex justify-end">
+                        <button class="copy-btn px-3 py-1 text-xs bg-green-600 text-white rounded-full shadow hover:bg-green-500 transition" onclick="copyAnswer(3)">Copy Answer</button>
                     </div>
                 </div>
             </article>
             
             <!-- Question 4 -->
-            <article class="question-card bg-white rounded-lg shadow-md border border-gray-200" id="q4">
-                <div class="question-header p-4 bg-blue-100/50 hover:bg-blue-200 cursor-pointer flex justify-between items-center rounded-t-lg" data-target="q4">
-                    <h2 class="question-title text-base font-semibold text-blue-800">4. Explain the Apriori algorithm for finding frequent itemsets. Illustrate the candidate generation and pruning steps.</h2>
-                    <span class="toggle-icon text-blue-800">&#9660;</span>
+            <article class="question-card bg-gray-900 rounded-lg shadow-md border border-gray-800" id="q4">
+                <div class="question-header p-4 bg-gray-800 hover:bg-gray-700 cursor-pointer flex justify-between items-center rounded-t-lg transition" data-target="q4">
+                    <h2 class="question-title text-base font-semibold text-blue-300">4. Explain the Apriori algorithm for finding frequent itemsets. Illustrate the candidate generation and pruning steps.</h2>
+                    <span class="toggle-icon text-blue-300">&#9660;</span>
                 </div>
-                <div class="question-content p-4 border-t border-gray-200">
+                <div class="question-content p-4 border-t border-gray-800">
                     <div class="answer-text">
-                        <p class="font-bold text-base mt-1 mb-1 text-blue-900">Apriori Algorithm</p>
+                        <p class="font-bold text-base mt-1 mb-1 text-blue-400">Apriori Algorithm</p>
                         <p class="text-sm">The Apriori algorithm is an influential algorithm for mining frequent itemsets (those whose support is greater than or equal to a minimum support threshold, $\text{min\_sup}$). It uses a prior knowledge property (the <strong class="key-term">Apriori property</strong>) to efficiently prune the search space.</p>
-                        <p class="font-bold text-sm mt-3 mb-1 text-blue-900">Apriori Property (Anti-monotone Property):</p>
+                        <p class="font-bold text-sm mt-3 mb-1 text-blue-400">Apriori Property (Anti-monotone Property):</p>
                         <p class="text-sm">If an itemset is frequent, then all of its subsets must also be frequent. Conversely, if any subset of a candidate itemset is infrequent, then the candidate itemset itself cannot be frequent and can be safely pruned.</p>
-                        <p class="font-bold text-sm mt-3 mb-1 text-blue-900">Steps:</p>
+                        <p class="font-bold text-sm mt-3 mb-1 text-blue-400">Steps:</p>
                         <ol class="list-decimal ml-5 space-y-2 text-sm">
                             <li><strong class="key-term">Join Step (Candidate Generation):</strong>
                                 <ul class="list-disc ml-5 mt-1 space-y-1">
@@ -277,23 +312,23 @@
                             <li><strong class="key-term">Iteration:</strong> The process repeats until no more frequent itemsets can be found.</li>
                         </ol>
                     </div>
-                    <div class="action-bar pt-3 mt-3 border-t flex justify-end">
-                        <button class="copy-btn px-3 py-1 text-xs bg-green-500 text-white rounded-full hover:bg-green-600 transition" onclick="copyAnswer(4)">Copy Answer</button>
+                    <div class="action-bar pt-3 mt-3 border-t border-gray-700 flex justify-end">
+                        <button class="copy-btn px-3 py-1 text-xs bg-green-600 text-white rounded-full shadow hover:bg-green-500 transition" onclick="copyAnswer(4)">Copy Answer</button>
                     </div>
                 </div>
             </article>
             
             <!-- Question 5 -->
-            <article class="question-card bg-white rounded-lg shadow-md border border-gray-200" id="q5">
-                <div class="question-header p-4 bg-blue-100/50 hover:bg-blue-200 cursor-pointer flex justify-between items-center rounded-t-lg" data-target="q5">
-                    <h2 class="question-title text-base font-semibold text-blue-800">5. Define Cluster Analysis. Explain the requirement of an effective clustering method.</h2>
-                    <span class="toggle-icon text-blue-800">&#9660;</span>
+            <article class="question-card bg-gray-900 rounded-lg shadow-md border border-gray-800" id="q5">
+                <div class="question-header p-4 bg-gray-800 hover:bg-gray-700 cursor-pointer flex justify-between items-center rounded-t-lg transition" data-target="q5">
+                    <h2 class="question-title text-base font-semibold text-blue-300">5. Define Cluster Analysis. Explain the requirement of an effective clustering method.</h2>
+                    <span class="toggle-icon text-blue-300">&#9660;</span>
                 </div>
-                <div class="question-content p-4 border-t border-gray-200">
+                <div class="question-content p-4 border-t border-gray-800">
                     <div class="answer-text">
-                        <p class="font-bold text-base mt-1 mb-1 text-blue-900">Cluster Analysis (Clustering)</p>
+                        <p class="font-bold text-base mt-1 mb-1 text-blue-400">Cluster Analysis (Clustering)</p>
                         <p class="text-sm">Cluster Analysis is a descriptive, unsupervised data mining task that groups a set of data objects into multiple groups (clusters) such that objects within the same cluster have <strong class="key-term">high similarity</strong> to one another, and objects in different clusters have <strong class="key-term">low similarity</strong>. Similarity is often measured by distance metrics (e.g., Euclidean distance).</p>
-                        <p class="font-bold text-base mt-4 mb-1 text-blue-900">Requirement of an Effective Clustering Method:</p>
+                        <p class="font-bold text-base mt-4 mb-1 text-blue-400">Requirement of an Effective Clustering Method:</p>
                         <ol class="list-decimal ml-5 space-y-2 text-sm">
                             <li><strong class="key-term">Scalability:</strong> Ability to handle large databases with millions of data objects efficiently and quickly.</li>
                             <li><strong class="key-term">Ability to Deal with Different Attribute Types:</strong> Capability to handle various data types, including numerical, categorical, and binary.</li>
@@ -304,31 +339,31 @@
                             <li><strong class="key-term">Interpretability and Usability:</strong> The resulting clusters should be meaningful, understandable, and useful for the user's specific application.</li>
                         </ol>
                     </div>
-                    <div class="action-bar pt-3 mt-3 border-t flex justify-end">
-                        <button class="copy-btn px-3 py-1 text-xs bg-green-500 text-white rounded-full hover:bg-green-600 transition" onclick="copyAnswer(5)">Copy Answer</button>
+                    <div class="action-bar pt-3 mt-3 border-t border-gray-700 flex justify-end">
+                        <button class="copy-btn px-3 py-1 text-xs bg-green-600 text-white rounded-full shadow hover:bg-green-500 transition" onclick="copyAnswer(5)">Copy Answer</button>
                     </div>
                 </div>
             </article>
 
             <!-- Question 6 -->
-            <article class="question-card bg-white rounded-lg shadow-md border border-gray-200" id="q6">
-                <div class="question-header p-4 bg-blue-100/50 hover:bg-blue-200 cursor-pointer flex justify-between items-center rounded-t-lg" data-target="q6">
-                    <h2 class="question-title text-base font-semibold text-blue-800">6. What is Classification in Data Mining? Differentiate between Classification and Prediction.</h2>
-                    <span class="toggle-icon text-blue-800">&#9660;</span>
+            <article class="question-card bg-gray-900 rounded-lg shadow-md border border-gray-800" id="q6">
+                <div class="question-header p-4 bg-gray-800 hover:bg-gray-700 cursor-pointer flex justify-between items-center rounded-t-lg transition" data-target="q6">
+                    <h2 class="question-title text-base font-semibold text-blue-300">6. What is Classification in Data Mining? Differentiate between Classification and Prediction.</h2>
+                    <span class="toggle-icon text-blue-300">&#9660;</span>
                 </div>
-                <div class="question-content p-4 border-t border-gray-200">
+                <div class="question-content p-4 border-t border-gray-800">
                     <div class="answer-text">
-                        <p class="font-bold text-base mt-1 mb-1 text-blue-900">Classification in Data Mining</p>
+                        <p class="font-bold text-base mt-1 mb-1 text-blue-400">Classification in Data Mining</p>
                         <p class="text-sm">Classification is a <strong class="key-term">supervised learning task</strong> that maps data items into predefined class labels (categories). It is a two-step process:</p>
                         <ol class="list-decimal ml-5 space-y-1 text-sm">
                             <li><strong class="key-term">Learning/Training:</strong> A classifier is built by analyzing a training set of data tuples (records) with known class labels.</li>
                             <li><strong class="key-term">Classification/Prediction:</strong> The trained classifier is used to predict the class label for new, unlabeled data tuples. The goal is to accurately assign the new data to one of the existing classes.</li>
                         </ol>
-                        <p class="font-bold text-base mt-4 mb-1 text-blue-900">Differentiation between Classification and Prediction:</p>
+                        <p class="font-bold text-base mt-4 mb-1 text-blue-400">Differentiation between Classification and Prediction:</p>
                         <div class="overflow-x-auto">
                             <table class="min-w-full text-sm">
                                 <thead>
-                                    <tr class="bg-gray-100">
+                                    <tr class="bg-gray-700">
                                         <th class="p-2">Feature</th>
                                         <th class="p-2">Classification</th>
                                         <th class="p-2">Prediction</th>
@@ -359,28 +394,28 @@
                             </table>
                         </div>
                     </div>
-                    <div class="action-bar pt-3 mt-3 border-t flex justify-end">
-                        <button class="copy-btn px-3 py-1 text-xs bg-green-500 text-white rounded-full hover:bg-green-600 transition" onclick="copyAnswer(6)">Copy Answer</button>
+                    <div class="action-bar pt-3 mt-3 border-t border-gray-700 flex justify-end">
+                        <button class="copy-btn px-3 py-1 text-xs bg-green-600 text-white rounded-full shadow hover:bg-green-500 transition" onclick="copyAnswer(6)">Copy Answer</button>
                     </div>
                 </div>
             </article>
 
             <!-- Question 7 -->
-            <article class="question-card bg-white rounded-lg shadow-md border border-gray-200" id="q7">
-                <div class="question-header p-4 bg-blue-100/50 hover:bg-blue-200 cursor-pointer flex justify-between items-center rounded-t-lg" data-target="q7">
-                    <h2 class="question-title text-base font-semibold text-blue-800">7. Explain the Decision Tree Induction algorithm for classification. What is Information Gain and how is it used for attribute selection?</h2>
-                    <span class="toggle-icon text-blue-800">&#9660;</span>
+            <article class="question-card bg-gray-900 rounded-lg shadow-md border border-gray-800" id="q7">
+                <div class="question-header p-4 bg-gray-800 hover:bg-gray-700 cursor-pointer flex justify-between items-center rounded-t-lg transition" data-target="q7">
+                    <h2 class="question-title text-base font-semibold text-blue-300">7. Explain the Decision Tree Induction algorithm for classification. What is Information Gain and how is it used for attribute selection?</h2>
+                    <span class="toggle-icon text-blue-300">&#9660;</span>
                 </div>
-                <div class="question-content p-4 border-t border-gray-200">
+                <div class="question-content p-4 border-t border-gray-800">
                     <div class="answer-text">
-                        <p class="font-bold text-base mt-1 mb-1 text-blue-900">Decision Tree Induction Algorithm</p>
+                        <p class="font-bold text-base mt-1 mb-1 text-blue-400">Decision Tree Induction Algorithm</p>
                         <p class="text-sm">Decision Tree Induction is a non-parametric classification method that generates a tree-like structure where:</p>
                         <ul class="list-disc ml-5 space-y-1 text-sm">
                             <li>Each internal node represents a <strong class="key-term">test on an attribute</strong>.</li>
                             <li>Each branch represents an <strong class="key-term">outcome of the test</strong>.</li>
                             <li>Each leaf node holds a <strong class="key-term">class label</strong>.</li>
                         </ul>
-                        <p class="font-bold text-sm mt-3 mb-1 text-blue-900">Algorithm Outline (Top-down, Recursive):</p>
+                        <p class="font-bold text-sm mt-3 mb-1 text-blue-400">Algorithm Outline (Top-down, Recursive):</p>
                         <ol class="list-decimal ml-5 space-y-1 text-sm">
                             <li>The tree starts as a single node (the root) representing the entire training dataset.</li>
                             <li>If all samples in the current node belong to the same class, the node becomes a leaf and is labeled with that class.</li>
@@ -389,7 +424,7 @@
                             <li>The process is repeated recursively for each resulting subset until a stopping condition is met (e.g., all samples belong to the same class, no remaining attributes, or maximum depth reached).</li>
                         </ol>
                         
-                        <p class="font-bold text-base mt-4 mb-1 text-blue-900">Information Gain</p>
+                        <p class="font-bold text-base mt-4 mb-1 text-blue-400">Information Gain</p>
                         <ul class="list-disc ml-5 space-y-1 text-sm">
                             <li><strong class="key-term">Definition:</strong> Information Gain (IG) measures the expected reduction in entropy caused by partitioning the data based on an attribute. It represents how much uncertainty about the class label is reduced by knowing the value of that attribute.</li>
                             <li><strong class="key-term">Formula:</strong></li>
@@ -400,31 +435,31 @@
                             <li>$\text{Info}(D)$ is the required average information (entropy) to classify a tuple in data set $D$.</li>
                             <li>$\text{Info}_A(D)$ is the expected information required to classify a tuple from $D$ after partitioning by attribute $A$.</li>
                         </ul>
-                        <p class="font-bold text-sm mt-4 mb-1 text-blue-900">Use for Attribute Selection:</p>
+                        <p class="font-bold text-sm mt-4 mb-1 text-blue-400">Use for Attribute Selection:</p>
                         <p class="text-sm">Information Gain is the primary metric used in algorithms like ID3 (and its derivatives) for <strong class="key-term">attribute selection</strong>. At each step of the tree induction, the algorithm calculates the Information Gain for <em>every</em> available attribute and <strong class="key-term">selects the attribute that yields the highest Information Gain</strong> as the splitting criterion for the current node. This attribute creates the purest (most homogenous) partition of the data with respect to class labels.</p>
                     </div>
-                    <div class="action-bar pt-3 mt-3 border-t flex justify-end">
-                        <button class="copy-btn px-3 py-1 text-xs bg-green-500 text-white rounded-full hover:bg-green-600 transition" onclick="copyAnswer(7)">Copy Answer</button>
+                    <div class="action-bar pt-3 mt-3 border-t border-gray-700 flex justify-end">
+                        <button class="copy-btn px-3 py-1 text-xs bg-green-600 text-white rounded-full shadow hover:bg-green-500 transition" onclick="copyAnswer(7)">Copy Answer</button>
                     </div>
                 </div>
             </article>
 
             <!-- Question 8 -->
-            <article class="question-card bg-white rounded-lg shadow-md border border-gray-200" id="q8">
-                <div class="question-header p-4 bg-blue-100/50 hover:bg-blue-200 cursor-pointer flex justify-between items-center rounded-t-lg" data-target="q8">
-                    <h2 class="question-title text-base font-semibold text-blue-800">8. Write short notes on the following clustering algorithms for large databases: a. BIRCH b. DBSCAN</h2>
-                    <span class="toggle-icon text-blue-800">&#9660;</span>
+            <article class="question-card bg-gray-900 rounded-lg shadow-md border border-gray-800" id="q8">
+                <div class="question-header p-4 bg-gray-800 hover:bg-gray-700 cursor-pointer flex justify-between items-center rounded-t-lg transition" data-target="q8">
+                    <h2 class="question-title text-base font-semibold text-blue-300">8. Write short notes on the following clustering algorithms for large databases: a. BIRCH b. DBSCAN</h2>
+                    <span class="toggle-icon text-blue-300">&#9660;</span>
                 </div>
-                <div class="question-content p-4 border-t border-gray-200">
+                <div class="question-content p-4 border-t border-gray-800">
                     <div class="answer-text">
-                        <p class="font-bold text-sm mt-1 mb-1 text-gray-700">a. BIRCH (Balanced Iterative Reducing and Clustering using Hierarchies)</p>
+                        <p class="font-bold text-sm mt-1 mb-1 text-gray-400">a. BIRCH (Balanced Iterative Reducing and Clustering using Hierarchies)</p>
                         <ul class="list-disc ml-5 space-y-1 text-sm">
                             <li><strong class="key-term">Purpose:</strong> Designed for clustering large datasets by summarizing the data into a more compact structure.</li>
                             <li><strong class="key-term">Structure:</strong> It uses a <strong class="key-term">Clustering Feature (CF) tree</strong>—a height-balanced tree structure that stores summary statistics for subclusters. A CF is a three-dimensional vector $(N, \text{LS}, \text{SS})$, where $N$ is the number of data points, $\text{LS}$ is the linear sum, and $\text{SS}$ is the square sum of the data points.</li>
                             <li><strong class="key-term">Process:</strong> BIRCH performs clustering in a single scan of the dataset. It builds the CF tree dynamically as data points are inserted, effectively reducing the original dataset size. A global clustering algorithm (like k-Means) is then optionally applied to the leaf nodes of the CF tree.</li>
                             <li><strong class="key-term">Key Advantage:</strong> Highly efficient and scalable for large, high-dimensional data; incremental clustering possible.</li>
                         </ul>
-                        <p class="font-bold text-sm mt-4 mb-1 text-gray-700">b. DBSCAN (Density-Based Spatial Clustering of Applications with Noise)</p>
+                        <p class="font-bold text-sm mt-4 mb-1 text-gray-400">b. DBSCAN (Density-Based Spatial Clustering of Applications with Noise)</p>
                         <ul class="list-disc ml-5 space-y-1 text-sm">
                             <li><strong class="key-term">Purpose:</strong> A density-based clustering algorithm capable of finding arbitrarily shaped clusters and identifying outliers (noise).</li>
                             <li><strong class="key-term">Core Concept:</strong> DBSCAN groups together densely connected data points. It requires two parameters:
@@ -444,23 +479,23 @@
                             <li><strong class="key-term">Key Advantage:</strong> Can discover clusters of arbitrary shape and is robust to noise/outliers.</li>
                         </ul>
                     </div>
-                    <div class="action-bar pt-3 mt-3 border-t flex justify-end">
-                        <button class="copy-btn px-3 py-1 text-xs bg-green-500 text-white rounded-full hover:bg-green-600 transition" onclick="copyAnswer(8)">Copy Answer</button>
+                    <div class="action-bar pt-3 mt-3 border-t border-gray-700 flex justify-end">
+                        <button class="copy-btn px-3 py-1 text-xs bg-green-600 text-white rounded-full shadow hover:bg-green-500 transition" onclick="copyAnswer(8)">Copy Answer</button>
                     </div>
                 </div>
             </article>
             
             <!-- Question 9 -->
-            <article class="question-card bg-white rounded-lg shadow-md border border-gray-200" id="q9">
-                <div class="question-header p-4 bg-blue-100/50 hover:bg-blue-200 cursor-pointer flex justify-between items-center rounded-t-lg" data-target="q9">
-                    <h2 class="question-title text-base font-semibold text-blue-800">9. What are Association Rules? Define Support, Confidence, and Lift with examples.</h2>
-                    <span class="toggle-icon text-blue-800">&#9660;</span>
+            <article class="question-card bg-gray-900 rounded-lg shadow-md border border-gray-800" id="q9">
+                <div class="question-header p-4 bg-gray-800 hover:bg-gray-700 cursor-pointer flex justify-between items-center rounded-t-lg transition" data-target="q9">
+                    <h2 class="question-title text-base font-semibold text-blue-300">9. What are Association Rules? Define Support, Confidence, and Lift with examples.</h2>
+                    <span class="toggle-icon text-blue-300">&#9660;</span>
                 </div>
-                <div class="question-content p-4 border-t border-gray-200">
+                <div class="question-content p-4 border-t border-gray-800">
                     <div class="answer-text">
-                        <p class="font-bold text-base mt-1 mb-1 text-blue-900">Association Rules</p>
+                        <p class="font-bold text-base mt-1 mb-1 text-blue-400">Association Rules</p>
                         <p class="text-sm">Association Rules are expressions of the form $A \Rightarrow B$, where $A$ and $B$ are sets of items (itemsets) and $A \cap B = \emptyset$. The rule means that if itemset $A$ occurs in a transaction, then itemset $B$ is likely to occur as well. They are typically generated after finding frequent itemsets based on minimum support and confidence thresholds.</p>
-                        <p class="font-bold text-base mt-4 mb-1 text-blue-900">Definitions and Formulas:</p>
+                        <p class="font-bold text-base mt-4 mb-1 text-blue-400">Definitions and Formulas:</p>
                         <ul class="list-disc ml-5 space-y-3 text-sm">
                             <li><strong class="key-term">Support ($S$)</strong>
                                 <ul class="list-none ml-0 mt-1 space-y-1">
@@ -495,21 +530,21 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="action-bar pt-3 mt-3 border-t flex justify-end">
-                        <button class="copy-btn px-3 py-1 text-xs bg-green-500 text-white rounded-full hover:bg-green-600 transition" onclick="copyAnswer(9)">Copy Answer</button>
+                    <div class="action-bar pt-3 mt-3 border-t border-gray-700 flex justify-end">
+                        <button class="copy-btn px-3 py-1 text-xs bg-green-600 text-white rounded-full shadow hover:bg-green-500 transition" onclick="copyAnswer(9)">Copy Answer</button>
                     </div>
                 </div>
             </article>
 
             <!-- Question 10 -->
-            <article class="question-card bg-white rounded-lg shadow-md border border-gray-200" id="q10">
-                <div class="question-header p-4 bg-blue-100/50 hover:bg-blue-200 cursor-pointer flex justify-between items-center rounded-t-lg" data-target="q10">
-                    <h2 class="question-title text-base font-semibold text-blue-800">10. List and briefly explain the major Issues in Data Mining.</h2>
-                    <span class="toggle-icon text-blue-800">&#9660;</span>
+            <article class="question-card bg-gray-900 rounded-lg shadow-md border border-gray-800" id="q10">
+                <div class="question-header p-4 bg-gray-800 hover:bg-gray-700 cursor-pointer flex justify-between items-center rounded-t-lg transition" data-target="q10">
+                    <h2 class="question-title text-base font-semibold text-blue-300">10. List and briefly explain the major Issues in Data Mining.</h2>
+                    <span class="toggle-icon text-blue-300">&#9660;</span>
                 </div>
-                <div class="question-content p-4 border-t border-gray-200">
+                <div class="question-content p-4 border-t border-gray-800">
                     <div class="answer-text">
-                        <p class="font-bold text-base mt-1 mb-1 text-blue-900">Major issues in data mining include:</p>
+                        <p class="font-bold text-base mt-1 mb-1 text-blue-400">Major issues in data mining include:</p>
                         <ol class="list-decimal ml-5 space-y-2 text-sm">
                             <li><strong class="key-term">Mining Methodology and User Interaction:</strong>
                                 <ul class="list-disc ml-5 mt-1 space-y-1">
@@ -536,23 +571,23 @@
                             </li>
                         </ol>
                     </div>
-                    <div class="action-bar pt-3 mt-3 border-t flex justify-end">
-                        <button class="copy-btn px-3 py-1 text-xs bg-green-500 text-white rounded-full hover:bg-green-600 transition" onclick="copyAnswer(10)">Copy Answer</button>
+                    <div class="action-bar pt-3 mt-3 border-t border-gray-700 flex justify-end">
+                        <button class="copy-btn px-3 py-1 text-xs bg-green-600 text-white rounded-full shadow hover:bg-green-500 transition" onclick="copyAnswer(10)">Copy Answer</button>
                     </div>
                 </div>
             </article>
 
             <!-- Question 11 -->
-            <article class="question-card bg-white rounded-lg shadow-md border border-gray-200" id="q11">
-                <div class="question-header p-4 bg-blue-100/50 hover:bg-blue-200 cursor-pointer flex justify-between items-center rounded-t-lg" data-target="q11">
-                    <h2 class="question-title text-base font-semibold text-blue-800">11. What is OLAP? Explain the basic conceptual view of OLAP using cubes, dimensions, and measures.</h2>
-                    <span class="toggle-icon text-blue-800">&#9660;</span>
+            <article class="question-card bg-gray-900 rounded-lg shadow-md border border-gray-800" id="q11">
+                <div class="question-header p-4 bg-gray-800 hover:bg-gray-700 cursor-pointer flex justify-between items-center rounded-t-lg transition" data-target="q11">
+                    <h2 class="question-title text-base font-semibold text-blue-300">11. What is OLAP? Explain the basic conceptual view of OLAP using cubes, dimensions, and measures.</h2>
+                    <span class="toggle-icon text-blue-300">&#9660;</span>
                 </div>
-                <div class="question-content p-4 border-t border-gray-200">
+                <div class="question-content p-4 border-t border-gray-800">
                     <div class="answer-text">
-                        <p class="font-bold text-base mt-1 mb-1 text-blue-900">OLAP (Online Analytical Processing)</p>
+                        <p class="font-bold text-base mt-1 mb-1 text-blue-400">OLAP (Online Analytical Processing)</p>
                         <p class="text-sm">OLAP is a category of software technology that enables analysts and managers to gain <strong class="key-term">insight</strong> into data through fast, consistent, interactive access to a wide variety of possible views of information that has been transformed from raw data into a multidimensional structure. It is used for complex, ad-hoc, analytical queries.</p>
-                        <p class="font-bold text-base mt-4 mb-1 text-blue-900">Basic Conceptual View:</p>
+                        <p class="font-bold text-base mt-4 mb-1 text-blue-400">Basic Conceptual View:</p>
                         <p class="text-sm">OLAP data is organized around the <strong class="key-term">Multidimensional Data Model</strong>, which is conceptually represented as a <strong class="key-term">Data Cube</strong>.</p>
                         <ul class="list-disc ml-5 space-y-2 text-sm mt-2">
                             <li><strong class="key-term">Data Cube:</strong> A multidimensional array of data where each cell contains a measure of interest. It is formed by the intersection of multiple dimensions.</li>
@@ -574,44 +609,44 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="action-bar pt-3 mt-3 border-t flex justify-end">
-                        <button class="copy-btn px-3 py-1 text-xs bg-green-500 text-white rounded-full hover:bg-green-600 transition" onclick="copyAnswer(11)">Copy Answer</button>
+                    <div class="action-bar pt-3 mt-3 border-t border-gray-700 flex justify-end">
+                        <button class="copy-btn px-3 py-1 text-xs bg-green-600 text-white rounded-full shadow hover:bg-green-500 transition" onclick="copyAnswer(11)">Copy Answer</button>
                     </div>
                 </div>
             </article>
 
             <!-- Question 12 -->
-            <article class="question-card bg-white rounded-lg shadow-md border border-gray-200" id="q12">
-                <div class="question-header p-4 bg-blue-100/50 hover:bg-blue-200 cursor-pointer flex justify-between items-center rounded-t-lg" data-target="q12">
-                    <h2 class="question-title text-base font-semibold text-blue-800">12. List and explain the different Types of OLAP Servers (ROLAP, MOLAP, HOLAP). Compare them based on storage and performance.</h2>
-                    <span class="toggle-icon text-blue-800">&#9660;</span>
+            <article class="question-card bg-gray-900 rounded-lg shadow-md border border-gray-800" id="q12">
+                <div class="question-header p-4 bg-gray-800 hover:bg-gray-700 cursor-pointer flex justify-between items-center rounded-t-lg transition" data-target="q12">
+                    <h2 class="question-title text-base font-semibold text-blue-300">12. List and explain the different Types of OLAP Servers (ROLAP, MOLAP, HOLAP). Compare them based on storage and performance.</h2>
+                    <span class="toggle-icon text-blue-300">&#9660;</span>
                 </div>
-                <div class="question-content p-4 border-t border-gray-200">
+                <div class="question-content p-4 border-t border-gray-800">
                     <div class="answer-text">
                         <p class="text-sm">The three main types of OLAP servers are <strong class="key-term">ROLAP</strong>, <strong class="key-term">MOLAP</strong>, and <strong class="key-term">HOLAP</strong>.</p>
-                        <p class="font-bold text-sm mt-3 mb-1 text-gray-700">1. ROLAP (Relational OLAP)</p>
+                        <p class="font-bold text-sm mt-3 mb-1 text-gray-400">1. ROLAP (Relational OLAP)</p>
                         <ul class="list-disc ml-5 space-y-1 text-sm">
                             <li><span class="font-semibold">Explanation:</span> ROLAP servers use an extended <strong class="key-term">relational database management system (RDBMS)</strong> to store and manage warehouse data. They implement the multidimensional model using standard SQL and relational tables.</li>
                             <li><span class="font-semibold">Storage:</span> Relational Tables.</li>
                             <li><span class="font-semibold">Performance:</span> Generally <strong class="key-term">slower</strong> query performance due to complex SQL joins.</li>
                         </ul>
-                        <p class="font-bold text-sm mt-3 mb-1 text-gray-700">2. MOLAP (Multidimensional OLAP)</p>
+                        <p class="font-bold text-sm mt-3 mb-1 text-gray-400">2. MOLAP (Multidimensional OLAP)</p>
                         <ul class="list-disc ml-5 space-y-1 text-sm">
                             <li><span class="font-semibold">Explanation:</span> MOLAP servers use a specialized <strong class="key-term">multidimensional array-based storage engine</strong>. Data is pre-calculated and stored in proprietary array structures (cubes).</li>
                             <li><span class="font-semibold">Storage:</span> Sparse Multidimensional Arrays (Cubes).</li>
                             <li><span class="font-semibold">Performance:</span> Generally the <strong class="key-term">fastest</strong> query performance because data is pre-aggregated and retrieval uses direct indexing.</li>
                         </ul>
-                        <p class="font-bold text-sm mt-3 mb-1 text-gray-700">3. HOLAP (Hybrid OLAP)</p>
+                        <p class="font-bold text-sm mt-3 mb-1 text-gray-400">3. HOLAP (Hybrid OLAP)</p>
                         <ul class="list-disc ml-5 space-y-1 text-sm">
                             <li><span class="font-semibold">Explanation:</span> HOLAP combines ROLAP and MOLAP. It stores summary (pre-aggregated) data in MOLAP's array format and detailed, raw data in ROLAP's relational format.</li>
                             <li><span class="font-semibold">Storage:</span> Hybrid (Summary data in Cubes, Detail data in Relational Tables).</li>
                             <li><span class="font-semibold">Performance:</span> Offers a <strong class="key-term">balance</strong> (fast for summary data, slower for drill-down to detail).</li>
                         </ul>
-                        <p class="font-bold text-base mt-4 mb-1 text-blue-900">Comparison Table:</p>
+                        <p class="font-bold text-base mt-4 mb-1 text-blue-400">Comparison Table:</p>
                         <div class="overflow-x-auto">
                             <table class="min-w-full text-sm">
                                 <thead>
-                                    <tr class="bg-gray-100">
+                                    <tr class="bg-gray-700">
                                         <th class="p-2">Feature</th>
                                         <th class="p-2">ROLAP (Relational)</th>
                                         <th class="p-2">MOLAP (Multidimensional)</th>
@@ -641,28 +676,28 @@
                             </table>
                         </div>
                     </div>
-                    <div class="action-bar pt-3 mt-3 border-t flex justify-end">
-                        <button class="copy-btn px-3 py-1 text-xs bg-green-500 text-white rounded-full hover:bg-green-600 transition" onclick="copyAnswer(12)">Copy Answer</button>
+                    <div class="action-bar pt-3 mt-3 border-t border-gray-700 flex justify-end">
+                        <button class="copy-btn px-3 py-1 text-xs bg-green-600 text-white rounded-full shadow hover:bg-green-500 transition" onclick="copyAnswer(12)">Copy Answer</button>
                     </div>
                 </div>
             </article>
 
             <!-- Question 13 -->
-            <article class="question-card bg-white rounded-lg shadow-md border border-gray-200" id="q13">
-                <div class="question-header p-4 bg-blue-100/50 hover:bg-blue-200 cursor-pointer flex justify-between items-center rounded-t-lg" data-target="q13">
-                    <h2 class="question-title text-base font-semibold text-blue-800">13. Explain the Multidimensional Data Model with an example. Define Dimensions, Facts, and Measures.</h2>
-                    <span class="toggle-icon text-blue-800">&#9660;</span>
+            <article class="question-card bg-gray-900 rounded-lg shadow-md border border-gray-800" id="q13">
+                <div class="question-header p-4 bg-gray-800 hover:bg-gray-700 cursor-pointer flex justify-between items-center rounded-t-lg transition" data-target="q13">
+                    <h2 class="question-title text-base font-semibold text-blue-300">13. Explain the Multidimensional Data Model with an example. Define Dimensions, Facts, and Measures.</h2>
+                    <span class="toggle-icon text-blue-300">&#9660;</span>
                 </div>
-                <div class="question-content p-4 border-t border-gray-200">
+                <div class="question-content p-4 border-t border-gray-800">
                     <div class="answer-text">
-                        <p class="font-bold text-base mt-1 mb-1 text-blue-900">Multidimensional Data Model</p>
+                        <p class="font-bold text-base mt-1 mb-1 text-blue-400">Multidimensional Data Model</p>
                         <p class="text-sm">The Multidimensional Data Model (MDDM) views data as organized into facts and dimensions. It is the underlying data structure used by Data Warehousing and OLAP systems. Conceptually, it is represented as a <strong class="key-term">Data Cube</strong>, where data is stored in cells defined by the coordinates of the dimensions.</p>
-                        <p class="font-bold text-sm mt-3 mb-1 text-blue-900">Example (A Sales Data Cube):</p>
+                        <p class="font-bold text-sm mt-3 mb-1 text-blue-400">Example (A Sales Data Cube):</p>
                         <p class="text-sm">A sales data cube could be defined by three dimensions: $\text{Time}$, $\text{Product}$, and $\text{Location}$. A cell in the cube might represent the sales data for a specific product item, in a specific city, during a specific month.</p>
                         <div class="overflow-x-auto mt-4">
                             <table class="min-w-full text-sm">
                                 <thead>
-                                    <tr class="bg-gray-100">
+                                    <tr class="bg-gray-700">
                                         <th class="p-2">Component</th>
                                         <th class="p-2">Definition</th>
                                         <th class="p-2">Example from Sales Cube</th>
@@ -689,24 +724,24 @@
                         </div>
                         <p class="text-sm mt-2">The model supports hierarchical roll-up and drill-down operations along the dimension attributes (e.g., drilling down from 'Year' to 'Quarter' to 'Month' along the $\text{Time}$ dimension).</p>
                     </div>
-                    <div class="action-bar pt-3 mt-3 border-t flex justify-end">
-                        <button class="copy-btn px-3 py-1 text-xs bg-green-500 text-white rounded-full hover:bg-green-600 transition" onclick="copyAnswer(13)">Copy Answer</button>
+                    <div class="action-bar pt-3 mt-3 border-t border-gray-700 flex justify-end">
+                        <button class="copy-btn px-3 py-1 text-xs bg-green-600 text-white rounded-full shadow hover:bg-green-500 transition" onclick="copyAnswer(13)">Copy Answer</button>
                     </div>
                 </div>
             </article>
 
             <!-- Question 14 -->
-            <article class="question-card bg-white rounded-lg shadow-md border border-gray-200" id="q14">
-                <div class="question-header p-4 bg-blue-100/50 hover:bg-blue-200 cursor-pointer flex justify-between items-center rounded-t-lg" data-target="q14">
-                    <h2 class="question-title text-base font-semibold text-blue-800">14. Compare the Apriori Algorithm with the FP-Growth Algorithm. What is the key advantage of FP-Growth?</h2>
-                    <span class="toggle-icon text-blue-800">&#9660;</span>
+            <article class="question-card bg-gray-900 rounded-lg shadow-md border border-gray-800" id="q14">
+                <div class="question-header p-4 bg-gray-800 hover:bg-gray-700 cursor-pointer flex justify-between items-center rounded-t-lg transition" data-target="q14">
+                    <h2 class="question-title text-base font-semibold text-blue-300">14. Compare the Apriori Algorithm with the FP-Growth Algorithm. What is the key advantage of FP-Growth?</h2>
+                    <span class="toggle-icon text-blue-300">&#9660;</span>
                 </div>
-                <div class="question-content p-4 border-t border-gray-200">
+                <div class="question-content p-4 border-t border-gray-800">
                     <div class="answer-text">
                         <div class="overflow-x-auto">
                             <table class="min-w-full text-sm">
                                 <thead>
-                                    <tr class="bg-gray-100">
+                                    <tr class="bg-gray-700">
                                         <th class="p-2">Feature</th>
                                         <th class="p-2">Apriori Algorithm</th>
                                         <th class="p-2">FP-Growth Algorithm</th>
@@ -741,11 +776,11 @@
                                 </tbody>
                             </table>
                         </div>
-                        <p class="font-bold text-base mt-4 mb-1 text-blue-900">Key Advantage of FP-Growth:</p>
+                        <p class="font-bold text-base mt-4 mb-1 text-blue-400">Key Advantage of FP-Growth:</p>
                         <p class="text-sm">The key advantage of the FP-Growth algorithm is that it <strong class="key-term">avoids the costly candidate generation and test process</strong> entirely. By encoding the dataset in a highly compact, prefix-tree structure called the <strong class="key-term">FP-Tree</strong>, it mines frequent itemsets directly from the tree using a divide-and-conquer (pattern growth) strategy, thereby significantly <strong class="key-term">reducing the number of database scans</strong> (from $N$ scans in Apriori to only 2) and dramatically improving performance and efficiency.</p>
                     </div>
-                    <div class="action-bar pt-3 mt-3 border-t flex justify-end">
-                        <button class="copy-btn px-3 py-1 text-xs bg-green-500 text-white rounded-full hover:bg-green-600 transition" onclick="copyAnswer(14)">Copy Answer</button>
+                    <div class="action-bar pt-3 mt-3 border-t border-gray-700 flex justify-end">
+                        <button class="copy-btn px-3 py-1 text-xs bg-green-600 text-white rounded-full shadow hover:bg-green-500 transition" onclick="copyAnswer(14)">Copy Answer</button>
                     </div>
                 </div>
             </article>
@@ -776,7 +811,7 @@
                 link.href = `#${id}`;
                 link.textContent = questionNumber;
                 link.setAttribute('aria-label', title);
-                link.classList.add('block', 'p-2', 'text-sm', 'text-blue-700', 'hover:bg-blue-100', 'rounded-lg', 'font-medium', 'ring-1', 'ring-blue-300');
+                link.classList.add('block', 'p-2', 'text-sm', 'text-blue-400', 'hover:bg-gray-700', 'rounded-lg', 'font-medium', 'ring-1', 'ring-gray-700');
 
                 listItem.appendChild(link);
                 tocList.appendChild(listItem);
